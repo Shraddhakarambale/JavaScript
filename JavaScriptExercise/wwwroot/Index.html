@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JSExercise</title>
+    <style>
+        #div1 {
+            background-color: aquamarine;
+        }
+    </style>
+
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    
+    <script src="bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+    <div id="div1">
+        <h1> ----------- Exercise 1 JavaScript Clock --------</h1>
+        <h2 id="ex1" style="color:blue"></h2>
+        <script>
+
+            setInterval(change, 1000);
+            function change() {
+                var d = new Date();
+                var dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                var day = dayName[d.getDay()];
+                var date = d.getDate();
+                var month = d.getMonth() + 1;
+                var year = d.getFullYear();
+                var hr = d.getHours();
+                var min = d.getMinutes();
+                var sec = d.getSeconds();
+
+                if (date < 10)
+                    date = '0' + date;
+                if (month < 10)
+                    month = '0' + month;
+                var currentDate = `${day}, ${date}/${month}/${year}  ${hr}:${min}:${sec}`;
+                document.getElementById("ex1").innerHTML = currentDate;
+            }
+        </script>
+    </div>
+    <h1>-------------- Exercise 2 – Leap Year Calendar-------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label for="text" class="col-form-label-lg "> Enter the year</label>
+            <input class="form-control-sm" type="number" id="n1" />
+            <button class="btn btn-primary" id="show">Show</button>
+        </div>
+        <h2 style="color: blue" id="ex2"></h2>
+    </div>
+    <script>
+        document.getElementById("show").addEventListener("click", show);
+        function show() {
+            let year = document.getElementById('n1').value;
+            if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
+
+                document.getElementById("ex2").innerHTML = "This is leap year";
+            }
+            else {
+                document.getElementById("ex2").innerHTML = "This is not leap year";
+            }
+
+        }
+    </script>
+
+    <h1>------------ Exercise 3 – 1st of January = Sunday?----------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <label for="text" class="col-form-label-lg"> Enter the year</label>
+            <input class="form-control-sm" type="number" id="n2" />
+            <button class="btn btn-primary " id="show1">Show</button>
+        </div>
+        <h2 id="ex3" style="color:blue"></h2>
+    </div>
+    <script>
+        document.getElementById("show1").addEventListener("click", result);
+        function result() {
+
+            let year1 = document.getElementById('n2').value;
+            const dt = new Date(year1 + '-' + '01' + '-' + '01');
+            if (dt.getDay() == 0) {
+                document.getElementById("ex3").innerHTML = "The 1st January is being Sunday " + year1;
+
+            }
+            else {
+                document.getElementById("ex3").innerHTML = "The 1st january not being Sunday " + year1;
+            }
+
+        }
+    </script>
+    <h1>-------------Exercise 4 – Guessing game-------------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <label for="text" class="col-form-label-lg">Enter the number between 1 and 10</label>
+            <input class="form-control-sm" type="number" id="n3" />
+            <input type="button" class="btn btn-primary" value="Guess" onclick="guessing()" />
+        </div>
+        <h2 style="color: blue" id="ex4"></h2>
+    </div>
+    <script>
+
+        function guessing() {
+            let number = document.getElementById('n3').value;
+            /* console.log(number);*/
+            let guss = Math.floor((Math.random() * 10) + 1);
+            var text = "";
+
+            if (number <= 10 && number != 0) {
+                if (number == guss) {
+
+                    text = "Good Job";
+
+
+                }
+                else {
+                    text = "Did not match.The random number is: " + guss;
+
+
+                }
+            }
+            else {
+                text = "Must  enter the number bewtween 1 to 10";
+
+            }
+            document.getElementById("ex4").innerHTML = text;
+            document.getElementById('n3').value = '';
+            document.getElementById('n3').focus();
+        }
+    </script>
+    <h1>-------------Exercise 5 – Days until Christmas---------------</h1>
+    <h3 style="color:blue" id="ex5"></h3>
+    <script>
+        const oneDay = 24 * 60 * 60 * 1000;
+        var c_date = new Date();
+        const chir_date = new Date(2024, 11, 25);
+        const diffDays = Math.round(Math.abs((c_date - chir_date) / oneDay));
+        document.getElementById("ex5").innerHTML = "Number of days remaining till Christmas:\n" + diffDays + " days";
+    </script>
+
+
+    <h1>----------Exercise 6 – Reverse input----------------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label for="text" class="col-form-label-lg"> Enter the text/number </label>
+            <input class="form-control" type="text" id="tx1" /><br />
+            <input type="button" class="btn btn-primary mt-1" value="Submit" onClick="funcreverse()" />
+        </div>
+        <h2 style="color:blue" id="ex6"></h2>
+    </div>
+    <script>
+        function funcreverse() {
+            var s = document.getElementById('tx1').value;
+            var reversed = '';
+            for (var i = s.length - 1; i >= 0; i--) {
+                reversed += s[i];
+            }
+            document.getElementById('ex6').innerHTML = "The reversed string is :" + reversed;
+
+        }
+    </script>
+
+    <h1>-------------Exercise 7 – Text manipulation-------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-1">
+            <label class="col-form-label-lg"> Enter the text</label>
+            <input class="form-control" type="text" id="tx2" />
+            <input type="button" class="btn btn-primary mt-2" value="Combination" onClick="getCombination()" />
+        </div>
+
+        <h2 style="color:blue" id="ex7"></h2>
+    </div>
+
+    <script>
+
+        function getCombination() {
+            var text = document.getElementById('tx2').value;
+            console.log(text);
+            let combinations = [];
+            for (let i = 0; i < text.length; i++) {
+                for (let j = i + 1; j < text.length + 1; j++) {
+                    combinations.push(text.slice(i, j));
+                    /*console.log(result);*/
+                }
+            }
+            document.getElementById("ex7").innerHTML = combinations;
+
+
+        }
+    </script>
+
+    <h1>--------------Exercise 8 – Text manipulation 2------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label class="col-form-label-lg"> Enter the word</label>
+
+            <input class="form-control" type="text" id="tx3" />
+            <input type="button" class=" btn btn-primary mt-2" value="Sort" onclick="getSort()" />
+        </div>
+        <h2 style="color:seagreen" id="ex8"></h2>
+    </div>
+    <script>
+        function getSort() {
+            var str = document.getElementById('tx3').value;
+            /* console.log(str);*/
+            var result = str.split('').sort().join('');
+            document.getElementById("ex8").innerHTML = "The sorted element is : " + result;
+        }
+    </script>
+
+    <h1>---------------------- Exercise 9 – Text manipulation 3 -----------------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label class="col-form-label-lg"> Enter the text</label>
+
+            <input class="form-control" type="text" id="tx4" />
+
+            <input type="button" class="btn btn-primary mt-2" value="Output" onclick="getManupulation()" />
+        </div>
+        <h2 style="color:darkgreen" id="ex901"></h2>
+        <h2 style="color:darkgreen" id="ex902"></h2>
+    </div>
+    <script>
+        function getManupulation() {
+            let sentence = document.getElementById('tx4').value;
+            sentence = sentence.match(/[a-zA-Z0-9]+/gi);
+            let longestWord = "";
+
+
+            for (let i = 0; i < sentence.length; i++) {
+                sentence[i] = sentence[i][0].toUpperCase() + sentence[i].substr(1);
+            }
+
+            for (let i = 0; i < sentence.length; i++) {
+                if (sentence[i].length > longestWord.length) {
+                    longestWord = sentence[i];
+
+                }
+            }
+            document.getElementById("ex901").innerHTML = sentence.toString().replaceAll(",", " ");
+
+            document.getElementById("ex902").innerHTML = "The longest word :" + longestWord;
+
+        }
+    </script>
+    <h1>----------------------Exercise 10 – Prime number -----------------------------</h1>
+
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <label for="text" class="col-form-label-lg">Enter the number </label>
+
+            <input class="form-control-sm" type="number" id="n4" />
+            <button type="button" class="btn btn-primary" onclick="primeCalculation()">Show</button>
+        </div>
+        <h2 style="color:blue" id="ex10"></h2>
+    </div>
+
+    <script>
+        function primeCalculation() {
+            let number = document.getElementById("n4").value;
+            let txt = "";
+            let boolTxt = true;
+            if (number == 1) {
+                txt = "1 is neither prime nor composite number";
+
+
+            } else if (number > 1) {
+                for (let i = 2; i < number; i++) {
+                    if (number % i == 0) {
+                        boolTxt = false;
+                        break;
+                    }
+                }
+
+
+                if (boolTxt)
+                    txt = "The " + number + " is a prime number";
+                else
+                    txt = "The " + number + " is not a prime number";
+            }
+            else {
+
+                txt = "The " + number + "is not a prime number";
+
+
+            }
+            document.getElementById("ex10").innerHTML = txt;
+        }
+    </script>
+    <h1>--------------- Exercise 11 – Type -----------------------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <label for="text" class="form-label">Enter something</label>
+            <input class="form-control-sm" tpe="text" id="tx5" />
+            <button type="button" class="btn btn-primary" onclick="show()">Show</button>
+        </div>
+        <h2 style="color:blue" id="ex11"></h2>
+    </div>
+    <script>
+        function show() {
+            let txt = document.getElementById("tx5").value;
+            let res = checkType(txt);
+            checkType(1);
+            checkType(true);
+            document.getElementById("ex11").innerHTML = res;
+
+        }
+        function checkType(txt) {
+            let x = typeof (txt);
+            console.log(x);
+            return x;
+
+        }
+    </script>
+
+    <h1>---------Exercise 12 – if loop statement----------------</h1>
+    <h3 style="color:blue" id="ex12"></h3>
+    <script>
+        let txt = "";
+        for (let i = 0; i <= 15; i++) {
+            if (i == 0)
+                txt = + i + " is even,";
+            else if (i % 2 == 0)
+                txt = txt + + i + " is even ,";
+            else if (i % 2 != 0)
+                txt = txt + + i + " is odd ,";
+
+        }
+        document.getElementById("ex12").innerHTML = txt;
+    </script>
+
+    <h1>----------Exercise 13 – if loop statement------------------</h1>
+    <h3 style="color:darkgreen" id="ex13"></h3>
+    <script>
+        function isHappy(num) {
+            var c = [];
+
+            while (num != 1 && c[num] != true) {
+                c[num] = true;
+                num = sumOfSquare(num);
+                //console.log(num);
+
+            }
+            return num === 1;
+        }
+        function sumOfSquare(num) {
+            var sum = 0;
+            while (num > 0) {
+                var digit = num % 10;
+                sum += digit * digit;
+                num = Math.floor(num / 10)
+                //console.log(num);
+            }
+
+            return sum;
+        }
+
+        var happyNum = [];
+        var cnt = 0;
+        var num = 1;
+        while (cnt < 10) {
+            if (isHappy(num)) {
+                happyNum.push(num);
+                cnt++;
+            }
+            num++;
+
+
+        }
+        document.getElementById("ex13").innerHTML = "The first 10 happy numbers are :" + happyNum.join(',');
+    </script>
+    <h1>-----------Exercise 14 – Array-----------</h1>
+    <h3 style="color:brown" id="ex14"></h3>
+    <script>
+        var workDays = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"];
+
+        var string = workDays.join(',');
+        document.getElementById("ex14").innerHTML = string + " are workdays.";
+
+
+    </script>
+    <h1>--------------Exercise 15 – Array 2----------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label class="col-form-label-lg">Enter the number seperated by comma</label>
+
+            <input class="form-control" type="text" id="n15" />
+            <button class="btn btn-primary mt-2" onclick="sortNumbers()">Sort</button>
+        </div>
+    </div>
+    <h3 style="color:darkred" id="ex15"></h3>
+    <script>
+        function sortNumbers() {
+            var num = document.getElementById("n15").value;
+            var arr = num.split(',').map(function (item) {
+                return parseInt(item.trim());
+            });
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            document.getElementById("ex15").innerHTML = "Sorted numbers are :" + arr.join(',');
+        }
+
+    </script>
+    <h1>--------------------Exercise 16 – Array 3----------------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label class="col-form-label-lg">Enter the number/text seperated by comma</label>
+            <input class="form-control" type="text" id="n16" />
+            <button class="btn btn-primary mt-1" onclick="removeFromArray()">Remove Duplicate</button>
+        </div>
+        <h3 style="color:blue" id="ex16"></h3>
+    </div>
+    <script>
+        function removeFromArray() {
+            //console.log(11);
+            let textElement = document.getElementById("n16");
+            let txt = [];
+            txt = textElement.value.split(',').map(String);
+            //console.log(txt);
+            document.getElementById("ex16").innerHTML = removeDuplicates(txt);
+        }
+
+        function removeDuplicates(arr) {
+
+            let unique = [];
+            arr.forEach(element => {
+                if (!unique.includes(element)) {
+                    unique.push(element);
+                }
+
+            });
+            return unique;
+        }
+    </script>
+    <h1>---------------Exercise 17 – Array 4----------------------</h1>
+    <div class="row">
+        <div class="col-md-4 mt-2">
+            <label class="col-form-label-lg">Enter the values seperated by comma</label>
+            <input class="form-control" type="text" id="n17">
+            <button class="btn btn-primary mt-1" onclick="removeNullAndZero()">Remove Null and Zero</button>
+        </div>
+        <h3 style="color:blue" id="ex17"></h3>
+    </div>
+    <script>
+        function removeNullAndZero() {
+            // Get the value from the input field
+            var input = document.getElementById('n17').value;
+
+            // Convert the input string into an array of values
+            var values = input.split(',').map(function (value) {
+                return value.trim();
+            });
+
+            // Filter out null and zero values
+            var filteredValues = values.filter(function (value) {
+                return value !== 'null' && value !== '0';
+            });
+
+            // Update the element to display the filtered values
+            document.getElementById('ex17').textContent = 'Filtered values: ' + filteredValues.join(', ');
+        }
+    </script>
+    <h1>-------------------Exercise 18 – Number of days in a month-------------------</h1>
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <label class="col-form-label-lg"> Enter the year</label>
+            <input type="number" id="n181" />
+            <label class="col-form-label-lg">Enter the month</label>
+            <input type="number" id="n182" />
+            <button class="btn btn-primary" onclick="getDaysInMonth()">Calculate</button>
+        </div>
+        <h4 style="color:blue" id="ex18"></h4>
+    </div>
+    <script>
+        function getDaysInMonth() {
+            var year = parseInt(document.getElementById('n181').value);
+            var month = parseInt(document.getElementById('n182').value);
+            var nodays = new Date(year, month, 0).getDate();
+            document.getElementById("ex18").innerHTML = "No. of days in the month: " + nodays;
+        }
+    </script>
+    <h1>-----------------Exercise 19 – Time Convertion-----------------------</h1>
+    <div class="row">
+        <div class="col-md-6 mt-2">
+            <label class="col-form-label-lg"> Enter the minute</label>
+            <input type="number" id="n19" />
+            <button class="btn btn-primary" onclick="toHoursAndMinutes()">Calculate</button>
+        </div>
+        <h2 style="color:green" id="ex19"></h2>
+    </div>
+    <script>
+        function toHoursAndMinutes() {
+
+            const totalMinutes = parseInt(document.getElementById('n19').value);
+            const minutes = totalMinutes % 60;
+            const hours = Math.floor(totalMinutes / 60);
+            const result = `${hours}hour(s) ${minutes}minute(s)`;
+            document.getElementById("ex19").innerHTML = result;
+        }
+    </script>
+
+    <h1>-----------Exercise 20 – Get the age -------------</h1>
+    <div class="row">
+        <div class="col-md-6 mt-2">
+            <label class="col-form-label-lg"> Enter the year</label>
+            <input type="number" id="n20" />
+            <button class="btn btn-primary" onclick="calculateYear()">Calculate</button>
+            </div>
+            <h2 style="color:blue" id="ex20"></h2>
+        </div>
+            <script>
+
+                function calculateYear() {
+
+                    let year = document.getElementById('n20').value;
+
+                    // Get the current year
+                    let currentYear = new Date().getFullYear();
+
+                    // Calculate the age
+                    let age = currentYear - year;
+
+                    // Update the element to display the age
+                    document.getElementById("ex20").innerHTML = "The age is " + age + " .";
+                }
+            </script>
+    </body>
+</html>
